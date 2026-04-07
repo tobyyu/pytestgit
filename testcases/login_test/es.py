@@ -85,11 +85,32 @@ def random_test():
 
 """
 题目2：设计一个 BankAccount 类
-要求：
-属性：owner (字符串), balance (浮点数，默认0)
-方法：
-deposit(amount)：存款，增加余额，打印新余额
+要求：属性：owner (字符串), balance (浮点数，默认0)
+方法：deposit(amount)：存款，增加余额，打印新余额
 withdraw(amount)：取款，如果余额不足则抛出 ValueError（异常信息 "余额不足"），否则减少余额并打印
 __str__：返回 "账户持有人: xxx, 余额: xxx"
 创建对象并进行存取操作，处理可能出现的异常。
 """
+
+class BankAccount:
+    def __init__(self,owner,balance=0.0):
+        self.owner = owner
+        self.balance = balance
+    def deposit(self,amount):
+        if amount <0:
+            print("余额必须为正")
+        else:
+            self.balance +=amount
+        print(f"存款后余额为：{self.balance}")
+    def withdraw(self,amount):
+        if amount>self.balance:
+            raise ValueError("余额不足")
+        self.balance -=amount
+        print(f"取款成功余额:{self.balance}")
+    def __str__(self):
+        return f"账户持有人: {self.owner}, 余额: {self.balance}"
+if __name__ == '__main__':
+    zhang = BankAccount("展示",10000)
+    zhang.deposit(10000)
+    zhang.withdraw(99999999)
+    print(zhang.__str__())
